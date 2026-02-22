@@ -1,15 +1,12 @@
-const express = require("express");
-const mercadopago = require("mercadopago");
-const cors = require("cors");
+import mercadopago from "mercadopago";
 
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-// Configure suas credenciais
 mercadopago.configurations.setAccessToken("APP_USR-508195820528822-022120-42d7b2b8141abe4e3af8b91204b7409f-539440876");
 
-app.post("/create_preference", async (req, res) => {
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Método não permitido" });
+  }
+
   const { quantity } = req.body;
 
   const preference = {
@@ -31,12 +28,9 @@ app.post("/create_preference", async (req, res) => {
 
   try {
     const response = await mercadopago.preferences.create(preference);
-    res.json({ id: response.body.id });
+    res.status(200).json({ id: response.body.id });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(500).json({ error: "Erro ao criar preferência" });
   }
-});
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
+}
