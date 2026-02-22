@@ -1,6 +1,6 @@
 import mercadopago from "mercadopago";
 
-mercadopago.configurations.setAccessToken("SEU_ACCESS_TOKEN");
+mercadopago.configurations.setAccessToken("APP_USR-508195820528822-022120-42d7b2b8141abe4e3af8b91204b7409f-539440876");
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
@@ -32,3 +32,4 @@ export default async function handler(req, res) {
     res.status(405).json({ error: "Method not allowed" });
   }
 }
+
