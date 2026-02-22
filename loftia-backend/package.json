@@ -1,9 +1,0 @@
-{
-  "name": "loftia-backend",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "dependencies": {
-    "mercadopago": "^2.0.0"
-  }
-}
